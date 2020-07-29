@@ -23,7 +23,7 @@ jobs:
       - name: Install
         run: yarn
       - name: Percy Test
-        uses: percy/storybook-action@v0.1.1
+        uses: percy/storybook-action@v0.1.4
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
 ```
@@ -43,7 +43,7 @@ jobs:
       - name: Install
         run: yarn
       - name: Percy Test
-        uses: percy/storybook-action@v0.1.1
+        uses: percy/storybook-action@v0.1.4
         with:
           custom-command: 'yarn storybook:percy'
         env:
