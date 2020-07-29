@@ -8646,14 +8646,21 @@ function setPercyBranchBuildInfo(pullRequestNumber) {
   }
 }
 
+function getPullRequestNumber(context) {
+  if (context.eventName === 'pull_request_review') {
+    return context.payload.pull_request.number;
+  }
+  return context.payload.number;
+}
+
 (async () => {
   try {
     let percyFlags = core.getInput('percy-flags');
     let customCommand = core.getInput('custom-command');
     let storybookFlags = core.getInput('storybook-flags');
     let workingDir = core.getInput('working-directory');
-    let pullRequestNumber =
-      github.context.payload.number || github.context.payload.pull_request.number;
+    let pullRequestNumber = getPullRequestNumber(github.context);
+
     let execOptions = {
       cwd: workingDir,
       windowsVerbatimArguments: true,
